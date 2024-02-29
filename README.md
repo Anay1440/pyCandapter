@@ -11,7 +11,8 @@ pip install python-can
 ```
 </li>
 <li>
-Download the pyCandapter module and place it in the same directory as your Python script.
+
+Download the [pyCandapter](./pyCandapter.py) module and place it in the same directory as your Python script.
 </li>
 <li> 
 
