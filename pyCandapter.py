@@ -43,8 +43,14 @@ class pyCandapter:
     def sendCANMessage(self, message):
         dataString = ''
         for i in range(0, len(message.data)):
-            dataString += str(hex(message.data[i]))[2:] 
-        response = self.sendSerialMessage('T{id}{length}{data}'.format(id = str(hex(message.arbitration_id))[2:], length = len(message.data), data = dataString))
+            messageDataString = str(hex(message.data[i]))[2:]
+            if len(messageDataString) == 1:
+                messageDataString = '0' + messageDataString
+            dataString += messageDataString
+        messageIDString = str(hex(message.arbitration_id))[2:]
+        while len(messageIDString) < 3:
+            messageIDString = '0' + messageIDString
+        response = self.sendSerialMessage('T{id}{length}{data}'.format(id = messageIDString, length = len(message.data), data = dataString))
         if response != True:
             raise ValueError('Error sending CAN message')
         else:
